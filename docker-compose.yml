@@ -1,0 +1,72 @@
+version: '2'
+services:
+  office:
+    image: lcrea/libreoffice-headless
+    networks:
+      - okem_net
+    restart: always
+  db1:
+    image: xcgd/postgresql:9.3
+    networks:
+      - okem_net
+    environment:
+      - POSTGRES_USER=pg
+    #volumes:
+    #  - ./etcpg:/etc/postgresql/9.3/main
+  web1:
+    image: oktovan/odoo:0.2
+    depends_on:
+      - db1
+    ports:
+      - "10002:8069"
+    command: start
+    networks:
+      - okem_net
+    environment:
+      - DB_HOST=db1
+      - DB_USER=pg
+    volumes:
+      - ./etc:/opt/odoo/etc
+      - ./odoo_log:/opt/odoo/var/log
+      - ~/add8/aeroo_reports:/opt/odoo/aeroo_reports
+      - ~/add8/server-tools:/opt/odoo/server-tools
+      - ~/add8/website_multi_image:/opt/odoo/website_multi_image
+      #- ./data/filestore:/opt/odoo/data/filestore
+      #- ./opnsynid-stock-logistics-workflow:/opt/odoo/opnsynid-stock-logistics-workflow
+      #- ./stock-logistics-transport:/opt/odoo/stock-logistics-transport
+      #- ./stock-logistics-workflow:/opt/odoo/stock-logistics-workflow
+      #- ./opnsynid-l10n-indonesia:/opt/odoo/opnsynid-l10n-indonesia
+      #- ./product-attribute:/opt/odoo/product-attribute
+      #- ./invent2:/opt/odoo/invent2
+      #- ./opnsynid-accounting-report:/opt/odoo/opnsynid-accounting-report
+      #- ./web:/opt/odoo/web
+      #- ./odoomrp-utils:/opt/odoo/odoomrp-utils
+      #- ./mis-builder:/opt/odoo/mis-builder
+      #- ./account-financial-reporting:/opt/odoo/account-financial-reporting
+      #- ./reporting-engine:/opt/odoo/reporting-engine
+      #- ./partner-contact:/opt/odoo/partner-contact
+      #- ./opnsynid-partner-contact:/opt/odoo/opnsynid-partner-contact
+      #- ./account-invoicing:/opt/odoo/account-invoicing
+      #- ./opnsynid-product-attribute:/opt/odoo/opnsynid-product-attribute
+      #- ./opnsynid-server-tools:/opt/odoo/opnsynid-server-tools
+      #- ./intrastat:/opt/odoo/intrastat
+      #- ./opnsynid-odoo-curated:/opt/odoo/opnsynid-odoo-curated
+      #- ./contract:/opt/odoo/contract
+      #- ./opnsynid-edii:/opt/odoo/opnsynid-edii
+      #- ./opnsynid-account-invoicing:/opt/odoo/opnsynid-account-invoicing
+      #- ./opnsynid-stock-reporting:/opt/odoo/opnsynid-stock-reporting
+      #- ./operating-unit:/opt/odoo/operating-unit
+      #- ./opnsynid-operating-unit:/opt/odoo/opnsynid-operating-unit
+      #- ./opnsynid-manufacture:/opt/odoo/opnsynid-manufacture
+
+  aeroo-docs:
+    image: adhoc/aeroo-docs
+    depends_on:
+      - web1
+    networks:
+      - okem_net
+    restart: always
+
+networks:
+    okem_net:
+      driver: bridge
