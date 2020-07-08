@@ -5,7 +5,7 @@ services:
     networks:
       - okem_net
     restart: always
-  db1:
+  db:
     image: xcgd/postgresql:9.3
     networks:
       - okem_net
@@ -13,17 +13,17 @@ services:
       - POSTGRES_USER=pg
     #volumes:
     #  - ./etcpg:/etc/postgresql/9.3/main
-  web1:
+  web:
     image: oktovan/odoo:0.2
     depends_on:
-      - db1
+      - db
     ports:
-      - "10002:8069"
+      - "8069:8069"
     command: start
     networks:
       - okem_net
     environment:
-      - DB_HOST=db1
+      - DB_HOST=db
       - DB_USER=pg
     volumes:
       - ./etc:/opt/odoo/etc
@@ -32,37 +32,37 @@ services:
       - ~/add8/server-tools:/opt/odoo/server-tools
       - ~/add8/website_multi_image:/opt/odoo/website_multi_image
       #- ./data/filestore:/opt/odoo/data/filestore
-      #- ./opnsynid-stock-logistics-workflow:/opt/odoo/opnsynid-stock-logistics-workflow
-      #- ./stock-logistics-transport:/opt/odoo/stock-logistics-transport
-      #- ./stock-logistics-workflow:/opt/odoo/stock-logistics-workflow
-      #- ./opnsynid-l10n-indonesia:/opt/odoo/opnsynid-l10n-indonesia
-      #- ./product-attribute:/opt/odoo/product-attribute
-      #- ./invent2:/opt/odoo/invent2
-      #- ./opnsynid-accounting-report:/opt/odoo/opnsynid-accounting-report
-      #- ./web:/opt/odoo/web
-      #- ./odoomrp-utils:/opt/odoo/odoomrp-utils
-      #- ./mis-builder:/opt/odoo/mis-builder
-      #- ./account-financial-reporting:/opt/odoo/account-financial-reporting
-      #- ./reporting-engine:/opt/odoo/reporting-engine
-      #- ./partner-contact:/opt/odoo/partner-contact
-      #- ./opnsynid-partner-contact:/opt/odoo/opnsynid-partner-contact
-      #- ./account-invoicing:/opt/odoo/account-invoicing
-      #- ./opnsynid-product-attribute:/opt/odoo/opnsynid-product-attribute
-      #- ./opnsynid-server-tools:/opt/odoo/opnsynid-server-tools
-      #- ./intrastat:/opt/odoo/intrastat
-      #- ./opnsynid-odoo-curated:/opt/odoo/opnsynid-odoo-curated
-      #- ./contract:/opt/odoo/contract
-      #- ./opnsynid-edii:/opt/odoo/opnsynid-edii
-      #- ./opnsynid-account-invoicing:/opt/odoo/opnsynid-account-invoicing
-      #- ./opnsynid-stock-reporting:/opt/odoo/opnsynid-stock-reporting
-      #- ./operating-unit:/opt/odoo/operating-unit
-      #- ./opnsynid-operating-unit:/opt/odoo/opnsynid-operating-unit
-      #- ./opnsynid-manufacture:/opt/odoo/opnsynid-manufacture
+      - ~/add8/opnsynid-stock-logistics-workflow:/opt/odoo/opnsynid-stock-logistics-workflow
+      - ~/add8/stock-logistics-transport:/opt/odoo/stock-logistics-transport
+      - ~/add8/stock-logistics-workflow:/opt/odoo/stock-logistics-workflow
+      - ~/add8/opnsynid-l10n-indonesia:/opt/odoo/opnsynid-l10n-indonesia
+      - ~/add8/product-attribute:/opt/odoo/product-attribute
+      - ~/add8/invent2:/opt/odoo/invent2
+      - ~/add8/opnsynid-accounting-report:/opt/odoo/opnsynid-accounting-report
+      - ~/add8/web:/opt/odoo/web
+      - ~/add8/odoomrp-utils:/opt/odoo/odoomrp-utils
+      - ~/add8/mis-builder:/opt/odoo/mis-builder
+      - ~/add8/account-financial-reporting:/opt/odoo/account-financial-reporting
+      - ~/add8/reporting-engine:/opt/odoo/reporting-engine
+      - ~/add8/partner-contact:/opt/odoo/partner-contact
+      - ~/add8/opnsynid-partner-contact:/opt/odoo/opnsynid-partner-contact
+      - ~/add8/account-invoicing:/opt/odoo/account-invoicing
+      - ~/add8/opnsynid-product-attribute:/opt/odoo/opnsynid-product-attribute
+      - ~/add8/opnsynid-server-tools:/opt/odoo/opnsynid-server-tools
+      - ~/add8/intrastat:/opt/odoo/intrastat
+      - ~/add8/opnsynid-odoo-curated:/opt/odoo/opnsynid-odoo-curated
+      - ~/add8/contract:/opt/odoo/contract
+      - ~/add8/opnsynid-edii:/opt/odoo/opnsynid-edii
+      - ~/add8/opnsynid-account-invoicing:/opt/odoo/opnsynid-account-invoicing
+      - ~/add8/opnsynid-stock-reporting:/opt/odoo/opnsynid-stock-reporting
+      - ~/add8/operating-unit:/opt/odoo/operating-unit
+      - ~/add8/opnsynid-operating-unit:/opt/odoo/opnsynid-operating-unit
+      - ~/add8/opnsynid-manufacture:/opt/odoo/opnsynid-manufacture
 
   aeroo-docs:
     image: adhoc/aeroo-docs
     depends_on:
-      - web1
+      - web
     networks:
       - okem_net
     restart: always
