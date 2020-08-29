@@ -30,6 +30,7 @@ services:
       - ./odoo_log:/opt/odoo/var/log
       - ~/add8/aeroo_reports:/opt/odoo/aeroo_reports
       - ~/add8/account-analytic:/opt/odoo/account-analytic
+      - ~/add8/opnsynid-l10n-indonesia-report:/opt/odoo/opnsynid-l10n-indonesia-report
       - ~/add8/odoomrp-wip:/opt/odoo/odoomrp-wip
       - ~/add8/opnsynid-hr:/opt/odoo/opnsynid-hr
       - ~/add8/server-tools:/opt/odoo/server-tools
