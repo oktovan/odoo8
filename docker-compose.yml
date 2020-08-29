@@ -29,6 +29,8 @@ services:
       - ./etc:/opt/odoo/etc
       - ./odoo_log:/opt/odoo/var/log
       - ~/add8/aeroo_reports:/opt/odoo/aeroo_reports
+      - ~/add8/account-analytic:/opt/odoo/account-analytic
+      - ~/add8/odoomrp-wip:/opt/odoo/odoomrp-wip
       - ~/add8/opnsynid-hr:/opt/odoo/opnsynid-hr
       - ~/add8/server-tools:/opt/odoo/server-tools
       - ~/add8/website_multi_image:/opt/odoo/website_multi_image
@@ -65,6 +67,7 @@ services:
       - ~/add8/operating-unit:/opt/odoo/operating-unit
       - ~/add8/opnsynid-operating-unit:/opt/odoo/opnsynid-operating-unit
       - ~/add8/opnsynid-manufacture:/opt/odoo/opnsynid-manufacture
+      - ~/add8/opnsynid-sale-reporting:/opt/odoo/opnsynid-sale-reporting
 
   aeroo-docs:
     image: adhoc/aeroo-docs
