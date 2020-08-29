@@ -35,7 +35,9 @@ services:
       - ~/add8/opnsynid-stock-logistics-workflow:/opt/odoo/opnsynid-stock-logistics-workflow
       - ~/add8/stock-logistics-transport:/opt/odoo/stock-logistics-transport
       - ~/add8/stock-logistics-workflow:/opt/odoo/stock-logistics-workflow
-      - ~/add8/opnsynid-purchase-workflow:/opt/odoo//opnsynid-purchase-workflow
+      - ~/add8/stock-logistics-warehouse:/opt/odoo/stock-logistics-warehouse
+      - ~/add8/opnsynid-stock-logistics-warehouse:/opt/odoo/opnsynid-stock-logistics-warehouse
+      - ~/add8/opnsynid-purchase-workflow:/opt/odoo/opnsynid-purchase-workflow
       - ~/add8/purchase-workflow:/opt/odoo/purchase-workflow
       - ~/add8/sale-workflow:/opt/odoo/sale-workflow
       - ~/add8/opnsynid-sale-workflow:/opt/odoo/opnsynid-sale-workflow
