@@ -29,6 +29,7 @@ services:
       - ./etc:/opt/odoo/etc
       - ./odoo_log:/opt/odoo/var/log
       - ~/add8/aeroo_reports:/opt/odoo/aeroo_reports
+      - ~/add8/opnsynid-hr:/opt/odoo/opnsynid-hr
       - ~/add8/server-tools:/opt/odoo/server-tools
       - ~/add8/website_multi_image:/opt/odoo/website_multi_image
       #- ./data/filestore:/opt/odoo/data/filestore
