@@ -69,6 +69,7 @@ services:
       - ~/add8/operating-unit:/opt/odoo/operating-unit
       - ~/add8/opnsynid-operating-unit:/opt/odoo/opnsynid-operating-unit
       - ~/add8/opnsynid-manufacture:/opt/odoo/opnsynid-manufacture
+      - ~/add8/manufacture:/opt/odoo/manufacture
       - ~/add8/opnsynid-sale-reporting:/opt/odoo/opnsynid-sale-reporting
 
   aeroo-docs:
