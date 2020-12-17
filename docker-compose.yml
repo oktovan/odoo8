@@ -3,83 +3,83 @@ services:
   office:
     image: lcrea/libreoffice-headless
     networks:
-      - okem_net
-    restart: always
-  db:
+      - net8
+    restart: unless-stopped
+  db8a:
     image: xcgd/postgresql:9.3
     networks:
-      - okem_net
+      - net8
     environment:
       - POSTGRES_USER=pg
-    #volumes:
-    #  - ./etcpg:/etc/postgresql/9.3/main
-  web:
+    # ports:
+    #  - "5432:5432"
+    restart: unless-stopped
+  web8:
     image: oktovan/odoo:0.2
     depends_on:
-      - db
+      - db8a
     ports:
-      - "8069:8069"
+      - "10000:8069"
     command: start
     networks:
-      - okem_net
+      - net8
     environment:
-      - DB_HOST=db
+      - DB_HOST=db8a
       - DB_USER=pg
     volumes:
       - ./etc:/opt/odoo/etc
-      - ./odoo_log:/opt/odoo/var/log
-      - ~/add8/aeroo_reports:/opt/odoo/aeroo_reports
-      - ~/add8/product-variant:/opt/odoo/product-variant
-      - ~/add8/account-analytic:/opt/odoo/account-analytic
-      - ~/add8/opnsynid-l10n-indonesia-report:/opt/odoo/opnsynid-l10n-indonesia-report
-      - ~/add8/odoomrp-wip:/opt/odoo/odoomrp-wip
-      - ~/add8/opnsynid-hr:/opt/odoo/opnsynid-hr
-      - ~/add8/server-tools:/opt/odoo/server-tools
-      - ~/add8/website_multi_image:/opt/odoo/website_multi_image
-      #- ./data/filestore:/opt/odoo/data/filestore
-      - ~/add8/opnsynid-stock-logistics-workflow:/opt/odoo/opnsynid-stock-logistics-workflow
-      - ~/add8/stock-logistics-transport:/opt/odoo/stock-logistics-transport
-      - ~/add8/stock-logistics-workflow:/opt/odoo/stock-logistics-workflow
-      - ~/add8/stock-logistics-warehouse:/opt/odoo/stock-logistics-warehouse
-      - ~/add8/opnsynid-stock-logistics-warehouse:/opt/odoo/opnsynid-stock-logistics-warehouse
-      - ~/add8/opnsynid-purchase-workflow:/opt/odoo/opnsynid-purchase-workflow
-      - ~/add8/purchase-workflow:/opt/odoo/purchase-workflow
-      - ~/add8/sale-workflow:/opt/odoo/sale-workflow
-      - ~/add8/opnsynid-sale-workflow:/opt/odoo/opnsynid-sale-workflow
-      - ~/add8/opnsynid-l10n-indonesia:/opt/odoo/opnsynid-l10n-indonesia
-      - ~/add8/product-attribute:/opt/odoo/product-attribute
-      - ~/add8/invent2:/opt/odoo/invent2
-      - ~/add8/opnsynid-accounting-report:/opt/odoo/opnsynid-accounting-report
-      - ~/add8/web:/opt/odoo/web
-      - ~/add8/odoomrp-utils:/opt/odoo/odoomrp-utils
-      - ~/add8/mis-builder:/opt/odoo/mis-builder
-      - ~/add8/account-financial-reporting:/opt/odoo/account-financial-reporting
-      - ~/add8/reporting-engine:/opt/odoo/reporting-engine
-      - ~/add8/partner-contact:/opt/odoo/partner-contact
-      - ~/add8/opnsynid-partner-contact:/opt/odoo/opnsynid-partner-contact
-      - ~/add8/account-invoicing:/opt/odoo/account-invoicing
-      - ~/add8/opnsynid-product-attribute:/opt/odoo/opnsynid-product-attribute
-      - ~/add8/opnsynid-server-tools:/opt/odoo/opnsynid-server-tools
-      - ~/add8/intrastat:/opt/odoo/intrastat
-      - ~/add8/opnsynid-odoo-curated:/opt/odoo/opnsynid-odoo-curated
-      - ~/add8/contract:/opt/odoo/contract
-      - ~/add8/opnsynid-edii:/opt/odoo/opnsynid-edii
-      - ~/add8/opnsynid-account-invoicing:/opt/odoo/opnsynid-account-invoicing
-      - ~/add8/opnsynid-stock-reporting:/opt/odoo/opnsynid-stock-reporting
-      - ~/add8/operating-unit:/opt/odoo/operating-unit
-      - ~/add8/opnsynid-operating-unit:/opt/odoo/opnsynid-operating-unit
-      - ~/add8/opnsynid-manufacture:/opt/odoo/opnsynid-manufacture
-      - ~/add8/manufacture:/opt/odoo/manufacture
-      - ~/add8/opnsynid-sale-reporting:/opt/odoo/opnsynid-sale-reporting
-
+      - ~/odoo/add8/aeroo_reports:/opt/odoo/aeroo_reports
+      - ~/odoo/add8/product-variant:/opt/odoo/product-variant
+      - ~/odoo/add8/account-analytic:/opt/odoo/account-analytic
+      - ~/odoo/add8/opnsynid-l10n-indonesia-report:/opt/odoo/opnsynid-l10n-indonesia-report
+      - ~/odoo/add8/odoomrp-wip:/opt/odoo/odoomrp-wip
+      - ~/odoo/add8/opnsynid-hr:/opt/odoo/opnsynid-hr
+      - ~/odoo/add8/server-tools:/opt/odoo/server-tools
+      - ~/odoo/add8/website_multi_image:/opt/odoo/website_multi_image
+      - ~/odoo/add8/opnsynid-stock-logistics-workflow:/opt/odoo/opnsynid-stock-logistics-workflow
+      - ~/odoo/add8/stock-logistics-transport:/opt/odoo/stock-logistics-transport
+      - ~/odoo/add8/stock-logistics-workflow:/opt/odoo/stock-logistics-workflow
+      - ~/odoo/add8/stock-logistics-warehouse:/opt/odoo/stock-logistics-warehouse
+      - ~/odoo/add8/opnsynid-stock-logistics-warehouse:/opt/odoo/opnsynid-stock-logistics-warehouse
+      - ~/odoo/add8/opnsynid-purchase-workflow:/opt/odoo/opnsynid-purchase-workflow
+      - ~/odoo/add8/purchase-workflow:/opt/odoo/purchase-workflow
+      - ~/odoo/add8/sale-workflow:/opt/odoo/sale-workflow
+      - ~/odoo/add8/opnsynid-sale-workflow:/opt/odoo/opnsynid-sale-workflow
+      - ~/odoo/add8/opnsynid-l10n-indonesia:/opt/odoo/opnsynid-l10n-indonesia
+      - ~/odoo/add8/product-attribute:/opt/odoo/product-attribute
+      - ~/odoo/add8/invent2:/opt/odoo/invent2
+      - ~/odoo/add8/opnsynid-accounting-report:/opt/odoo/opnsynid-accounting-report
+      - ~/odoo/add8/web:/opt/odoo/web
+      - ~/odoo/add8/odoomrp-utils:/opt/odoo/odoomrp-utils
+      - ~/odoo/add8/mis-builder:/opt/odoo/mis-builder
+      - ~/odoo/add8/account-financial-reporting:/opt/odoo/account-financial-reporting
+      - ~/odoo/add8/reporting-engine:/opt/odoo/reporting-engine
+      - ~/odoo/add8/partner-contact:/opt/odoo/partner-contact
+      - ~/odoo/add8/opnsynid-partner-contact:/opt/odoo/opnsynid-partner-contact
+      - ~/odoo/add8/account-invoicing:/opt/odoo/account-invoicing
+      - ~/odoo/add8/opnsynid-product-attribute:/opt/odoo/opnsynid-product-attribute
+      - ~/odoo/add8/opnsynid-server-tools:/opt/odoo/opnsynid-server-tools
+      - ~/odoo/add8/intrastat:/opt/odoo/intrastat
+      - ~/odoo/add8/opnsynid-odoo-curated:/opt/odoo/opnsynid-odoo-curated
+      - ~/odoo/add8/contract:/opt/odoo/contract
+      - ~/odoo/add8/opnsynid-edii:/opt/odoo/opnsynid-edii
+      - ~/odoo/add8/opnsynid-account-invoicing:/opt/odoo/opnsynid-account-invoicing
+      - ~/odoo/add8/opnsynid-stock-reporting:/opt/odoo/opnsynid-stock-reporting
+      - ~/odoo/add8/operating-unit:/opt/odoo/operating-unit
+      - ~/odoo/add8/opnsynid-operating-unit:/opt/odoo/opnsynid-operating-unit
+      - ~/odoo/add8/opnsynid-manufacture:/opt/odoo/opnsynid-manufacture
+      - ~/odoo/add8/manufacture:/opt/odoo/manufacture
+      - ~/odoo/add8/opnsynid-sale-reporting:/opt/odoo/opnsynid-sale-reporting
+    restart: unless-stopped  
   aeroo-docs:
     image: adhoc/aeroo-docs
     depends_on:
-      - web
+      - web8
     networks:
-      - okem_net
-    restart: always
+      - net8
+    restart: unless-stopped
 
 networks:
-    okem_net:
+    net8:
       driver: bridge
+
